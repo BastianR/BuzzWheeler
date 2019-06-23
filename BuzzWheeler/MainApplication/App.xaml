@@ -4,7 +4,14 @@
              xmlns:prism="http://prismlibrary.com/">
 
     <Application.Resources>
-
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MainApplication;component/Resources/Styles/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MainApplication;component/Resources/Styles/ButtonStyles.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MainApplication;component/Resources/Styles/TextBoxStyles.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MainApplication;component/Resources/Styles/ListViewStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
-    
+
 </prism:PrismApplication>

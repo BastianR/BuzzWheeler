@@ -60,6 +60,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AggregatorEvents\MessageBrCircleItemsEvent.cs" />
     <Compile Include="BuzzWheelerModule.cs" />
     <Compile Include="Contracts\ConstantNames.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -4,17 +4,50 @@
                     xmlns:controls="clr-namespace:BrElements.Controls">
 
     <Style TargetType="{x:Type controls:BrArcCircle}">
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:BrArcCircle}">
                     <Border Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}">
-                        <StackPanel>
-                            <ItemsControl ItemsSource="{Binding ItemsSource, RelativeSource={RelativeSource TemplatedParent}}">
-                                <TextBlock Text="{Binding Name}" />
-                            </ItemsControl>
-                        </StackPanel>
+                        <Grid x:Name="PART_CircleGrid">
+                            <Grid.Resources>
+                                <Style x:Key="BrArcStyle" TargetType="{x:Type ed:Arc}">
+                                    <Setter Property="ArcThickness" Value="50" />
+                                    <Setter Property="StrokeThickness" Value="3" />
+                                    <Setter Property="Fill" Value="#FF484848" />
+                                    <Setter Property="Stroke" Value="#FFE0E0E0" />
+                                    <Setter Property="Stretch" Value="None" />
+                                    <Setter Property="Effect">
+                                        <Setter.Value>
+                                            <DropShadowEffect Color="#FFAAAAAA" ShadowDepth="0" BlurRadius="15"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                                <Style x:Key="BrArcSelectedStyle" TargetType="{x:Type ed:Arc}" BasedOn="{StaticResource BrArcStyle}">
+                                    <Setter Property="Fill" Value="#FFEEEEEE" />
+                                    <Setter Property="Stroke" Value="#FF6D6D6D" />
+                                    <Setter Property="Effect">
+                                        <Setter.Value>
+                                            <DropShadowEffect Color="#FFEEEEEE" ShadowDepth="0" BlurRadius="50"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                                <Style x:Key="BrTextBlockStyle" TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Foreground" Value="#FFFAFAFA" />
+                                    <Setter Property="FontFamily" Value="Microsoft Sans Serif" />
+                                    <Setter Property="FontWeight" Value="Bold" />
+                                    <Setter Property="FontSize" Value="20" />
+                                </Style>
+                                <Style x:Key="BrTextBlockSelectedStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource BrTextBlockStyle}">
+                                    <Setter Property="Foreground" Value="#FF000000" />
+                                </Style>
+                            </Grid.Resources>
+
+                            <TextBlock x:Name="PART_MiddleTextBlock" FontFamily="Microsoft Sans Serif" FontWeight="Bold" FontSize="26" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Grid>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>

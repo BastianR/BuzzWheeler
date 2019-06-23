@@ -34,8 +34,8 @@ namespace BuzzWheeler
         {
             IRegionManager regionManager = containerProvider.Resolve<IRegionManager>();
 
-            regionManager.RegisterViewWithRegion(ConstantNames.RegionPlayerManagementView, typeof(PlayerManagementView));
             regionManager.RegisterViewWithRegion(ConstantNames.RegionBuzzWheelView, typeof(BuzzWheelView));
+            regionManager.RegisterViewWithRegion(ConstantNames.RegionPlayerManagementView, typeof(PlayerManagementView));
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry) { }

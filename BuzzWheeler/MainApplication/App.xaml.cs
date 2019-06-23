@@ -39,12 +39,6 @@ namespace MainApplication
             Logger.Info("[App.xaml.cs] Registering types");
         }
 
-        //protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
-        //{
-        //    Logger.Info("[App.xaml.cs] Configure module catalog");
-        //    moduleCatalog.AddModule<BuzzWheelerModule>();
-        //}
-
         protected override Window CreateShell()
         {
             Logger.Info("[App.xaml.cs] Creating shell");

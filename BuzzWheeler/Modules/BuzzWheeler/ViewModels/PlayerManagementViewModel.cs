@@ -1,7 +1,10 @@
 ﻿using BrElements.Classes;
+using BuzzWheeler.AggregatorEvents;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Mvvm;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace BuzzWheeler.ViewModels
 {
@@ -9,7 +12,10 @@ namespace BuzzWheeler.ViewModels
     {
         #region Fields
 
+        private readonly IEventAggregator m_EventAggregator;
+        private string m_EnteredName;
         private ObservableCollection<BrArcCircleItem> m_BrArcCircleItems;
+        private bool m_WheelIsRunning;
 
         #endregion
 
@@ -17,10 +23,26 @@ namespace BuzzWheeler.ViewModels
 
         #region Properties
 
+        public string EnteredName
+        {
+            get => m_EnteredName;
+            set
+            {
+                SetProperty(ref m_EnteredName, value);
+                AddPlayerCommand.RaiseCanExecuteChanged();
+            }
+        }
+
         public ObservableCollection<BrArcCircleItem> BrArcCircleItems
         {
             get => m_BrArcCircleItems;
             set => SetProperty(ref m_BrArcCircleItems, value);
+        }
+
+        public bool WheelIsRunning
+        {
+            get => m_WheelIsRunning;
+            set => SetProperty(ref m_WheelIsRunning, value);
         }
 
         #endregion
@@ -29,6 +51,7 @@ namespace BuzzWheeler.ViewModels
 
         #region Commands
 
+        public DelegateCommand RemoveEnteredNameCommand { get; private set; }
         public DelegateCommand AddPlayerCommand { get; private set; }
         public DelegateCommand<string> RemovePlayerCommand { get; private set; }
 
@@ -38,12 +61,16 @@ namespace BuzzWheeler.ViewModels
 
         #region Constructor
 
-        public PlayerManagementViewModel()
+        public PlayerManagementViewModel(IEventAggregator eventAggregator)
         {
+            m_EventAggregator = eventAggregator;
             m_BrArcCircleItems = new ObservableCollection<BrArcCircleItem>();
 
-            AddPlayerCommand = new DelegateCommand(AddPlayer);
-            RemovePlayerCommand = new DelegateCommand<string>(RemovePlayer);
+            RemoveEnteredNameCommand = new DelegateCommand(RemoveEnteredName);
+            AddPlayerCommand = new DelegateCommand(AddPlayer, CanAddPlayer);
+            RemovePlayerCommand = new DelegateCommand<string>(RemovePlayer, CanRemovePlayer);
+
+            SendMessageBrCircleItems();
         }
 
         #endregion
@@ -52,14 +79,61 @@ namespace BuzzWheeler.ViewModels
 
         #region CommandMethods
 
+        private void RemoveEnteredName()
+        {
+            EnteredName = "";
+        }
+
+        private bool CanAddPlayer()
+        {
+            bool canAddPlayer = false;
+
+            bool checkNullOrEmpty = string.IsNullOrEmpty(EnteredName);
+            bool checkRedundancy = BrArcCircleItems?.FirstOrDefault(brArcCircleItem => brArcCircleItem.Name == EnteredName) != null ? true : false;
+            bool checkWheelIsRunning = WheelIsRunning;
+
+            if (checkNullOrEmpty || checkRedundancy || checkWheelIsRunning)
+            {
+                canAddPlayer = false;
+            }
+            else
+            {
+                canAddPlayer = true;
+            }
+
+            return canAddPlayer;
+        }
+
         private void AddPlayer()
         {
+            BrArcCircleItems.Add(new BrArcCircleItem(EnteredName));
+            EnteredName = "";
+        }
 
+        private bool CanRemovePlayer(string playerName)
+        {
+            return WheelIsRunning ? false : true;
         }
 
         private void RemovePlayer(string playerName)
         {
+            BrArcCircleItem item = BrArcCircleItems?.FirstOrDefault(brArcCircleItem => brArcCircleItem.Name == playerName);
 
+            if (item != null)
+            {
+                BrArcCircleItems.Remove(item);
+            }
+        }
+
+        #endregion
+
+
+
+        #region Private Methods
+
+        private void SendMessageBrCircleItems()
+        {
+            m_EventAggregator.GetEvent<MessageBrCircleItemsEvent>().Publish(BrArcCircleItems);
         }
 
         #endregion

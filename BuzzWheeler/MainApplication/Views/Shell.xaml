@@ -6,13 +6,26 @@
         xmlns:prism="http://prismlibrary.com/"
         prism:ViewModelLocator.AutoWireViewModel="True"
         mc:Ignorable="d"
-        Title="Buzz Wheeler 1.0" Height="450" Width="800">
+        Title="Buzz Wheeler 1.0" Height="450" Width="800" Background="#FF212121">
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
 
+        <Image Grid.Column="0" Grid.ColumnSpan="2" Stretch="UniformToFill" Source="pack://application:,,,/MainApplication;component/Resources/Images/partyImage.jpg">
+            <Image.Effect>
+                <BlurEffect RenderingBias="Quality" Radius="10"/>
+            </Image.Effect>
+        </Image>
+
+        <Rectangle Grid.Column="0" Grid.ColumnSpan="2" Fill="#66000000" StrokeThickness="10" >
+            <Rectangle.Effect>
+                <DropShadowEffect BlurRadius="10"/>
+            </Rectangle.Effect>
+        </Rectangle>
+        
         <ContentControl Grid.Column="0" prism:RegionManager.RegionName="RegionPlayerManagementView" />
         <ContentControl Grid.Column="1" prism:RegionManager.RegionName="RegionBuzzWheelView" />
     </Grid>

@@ -4,10 +4,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:BrElements.Controls;assembly=BrElements"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" Background="Green">
+             d:DesignHeight="450" d:DesignWidth="800" Margin="20">
     <Grid>
-            
+        <controls:BrArcCircle BrItemsSource="{Binding BrArcCircleItems}" BrSelectedItemIndex="{Binding BrSelectedArcCircleIndex}" />
+
+        <Button Content="Roll" Margin="-5" BorderThickness="0" Height="40" Width="50" Opacity="0.6" HorizontalAlignment="Left" VerticalAlignment="Bottom" Command="{Binding StartWheelCommand}" FontFamily="Microsoft Sans Serif" FontWeight="Bold" FontSize="14" />
     </Grid>
 </UserControl>
