@@ -1,0 +1,50 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--Button Colors-->
+    <Color x:Key="ButtonDefaultBackground" >#FF424242</Color>
+    <SolidColorBrush x:Key="ButtonDefaultBackgroundBrush" Color="{StaticResource ButtonDefaultBackground}"/>
+    <Color x:Key="ButtonDefaultForeground">#FFFAFAFA</Color>
+    <SolidColorBrush x:Key="ButtonDefaultForegroundBrush" Color="{StaticResource ButtonDefaultForeground}"/>
+    <Color x:Key="ButtonDefaultBorder">#FF9E9E9E</Color>
+    <SolidColorBrush x:Key="ButtonDefaultBorderBrush" Color="{StaticResource ButtonDefaultBorder}"/>
+    <Color x:Key="ButtonMouseOverBackground">#FF616161</Color>
+    <SolidColorBrush x:Key="ButtonMouseOverBackgroundBrush" Color="{StaticResource ButtonMouseOverBackground}"/>
+    <Color x:Key="ButtonMouseOverForeground">#FFFAFAFA</Color>
+    <SolidColorBrush x:Key="ButtonMouseOverForegroundBrush" Color="{StaticResource ButtonMouseOverForeground}"/>
+    <Color x:Key="ButtonMouseOverBorder">#FF8E8E8E</Color>
+    <SolidColorBrush x:Key="ButtonMouseOverBorderBrush" Color="{StaticResource ButtonMouseOverBorder}"/>
+    <Color x:Key="ButtonPressedBackground">#FF757575</Color>
+    <SolidColorBrush x:Key="ButtonPressedBackgroundBrush" Color="{StaticResource ButtonPressedBackground}"/>
+    <Color x:Key="ButtonPressedForeground">#FFFAFAFA</Color>
+    <SolidColorBrush x:Key="ButtonPressedForegroundBrush" Color="{StaticResource ButtonPressedForeground}"/>
+    <Color x:Key="ButtonPressedBorder">#FF6D6D6D</Color>
+    <SolidColorBrush x:Key="ButtonPressedBorderBrush" Color="{StaticResource ButtonPressedBorder}"/>
+    <Color x:Key="ButtonDisabledBackground">#FF212121</Color>
+    <SolidColorBrush x:Key="ButtonDisabledBackgroundBrush" Color="{StaticResource ButtonDisabledBackground}"/>
+    <Color x:Key="ButtonDisabledForeground">#FF8E8E8E</Color>
+    <SolidColorBrush x:Key="ButtonDisabledForegroundBrush" Color="{StaticResource ButtonDisabledForeground}"/>
+    <Color x:Key="ButtonDisabledBorder">#FFAEAEAE</Color>
+    <SolidColorBrush x:Key="ButtonDisabledBorderBrush" Color="{StaticResource ButtonDisabledBorder}"/>
+
+    <!--Textbox Colors-->
+    <Color x:Key="TextBoxDefaultBackground">#FF616161</Color>
+    <SolidColorBrush x:Key="TextBoxDefaultBackgroundBrush" Color="{StaticResource TextBoxDefaultBackground}"/>
+    <Color x:Key="TextBoxDefaultForeground">#FFFAFAFA</Color>
+    <SolidColorBrush x:Key="TextBoxDefaultForegroundBrush" Color="{StaticResource TextBoxDefaultForeground}"/>
+    <Color x:Key="TextBoxDefaultBorder">#FF8E8E8E</Color>
+    <SolidColorBrush x:Key="TextBoxDefaultBorderBrush" Color="{StaticResource TextBoxDefaultBorder}"/>
+    <Color x:Key="TextBoxMouseOverBorder">#FF9E9E9E</Color>
+    <SolidColorBrush x:Key="TextBoxMouseOverBorderBrush" Color="{StaticResource TextBoxMouseOverBorder}"/>
+    <Color x:Key="TextBoxFocusedBorder">#FFAEAEAE</Color>
+    <SolidColorBrush x:Key="TextBoxFocusedBorderBrush" Color="{StaticResource TextBoxFocusedBorder}"/>
+
+    <!--ListView Colors-->
+    <Color x:Key="ListViewDefaultBackground">#7F212121</Color>
+    <SolidColorBrush x:Key="ListViewDefaultBackgroundBrush" Color="{StaticResource ListViewDefaultBackground}"/>
+    <Color x:Key="ListViewDefaultForeground">#FFFAFAFA</Color>
+    <SolidColorBrush x:Key="ListViewDefaultForegroundBrush" Color="{StaticResource ListViewDefaultForeground}"/>
+    <Color x:Key="ListViewDefaultBorder">#7F8E8E8E</Color>
+    <SolidColorBrush x:Key="ListViewDefaultBorderBrush" Color="{StaticResource ListViewDefaultBorder}"/>
+
+</ResourceDictionary>

@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="BuzzWheeler.Views.PlayerManagementView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="300"
+             x:Name="PlayerManagementUserControl">
+    
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBox Grid.Column="0" Width="Auto" Margin="5" BorderThickness="2"
+                         Text="{Binding EnteredName, UpdateSourceTrigger=PropertyChanged, FallbackValue=Test}" FontFamily="Microsoft Sans Serif" FontWeight="Bold" FontSize="14">
+                    <TextBox.InputBindings>
+                        <KeyBinding Key="Enter" Command="{Binding AddPlayerCommand}" />
+                        <KeyBinding Key="Esc" Command="{Binding RemoveEnteredNameCommand}" />
+                    </TextBox.InputBindings>
+                </TextBox>
+
+                <Button Grid.Column="1" Margin="5" Content="Add Player" Command="{Binding AddPlayerCommand}" BorderThickness="0" FontFamily="Microsoft Sans Serif" FontWeight="Bold" FontSize="14" />
+            </Grid>
+        </Border>
+
+        <Border Grid.Row="1">
+            <ListView ItemsSource="{Binding BrArcCircleItems, UpdateSourceTrigger=PropertyChanged}" Margin="5" BorderThickness="2">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Grid.IsSharedSizeScope="True" Margin="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="30" SharedSizeGroup="PlayerRemoveButtonGroup"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0" Text="{Binding Name}" FontFamily="Microsoft Sans Serif" FontWeight="Bold" FontSize="14" />
+                            <Button Grid.Column="1" Content="X" BorderThickness="0" Height="25" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Command="{Binding ElementName=PlayerManagementUserControl, Path=DataContext.RemovePlayerCommand}" CommandParameter="{Binding Name}" FontFamily="Microsoft Sans Serif" FontWeight="Bold" FontSize="14" />
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Border>
+    </Grid>
+    
+</UserControl>

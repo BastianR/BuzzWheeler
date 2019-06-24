@@ -1,0 +1,24 @@
+﻿<Window x:Class="MainApplication.Views.SplashScreenView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:prism="http://prismlibrary.com/"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        mc:Ignorable="d"
+        Title="SplashScreenView" 
+        Height="450" Width="800" 
+        Topmost="True" WindowStyle="None" ResizeMode="NoResize" 
+        WindowStartupLocation="CenterScreen" WindowState="Maximized" Background="{x:Null}">
+    
+    <Grid>
+        <Rectangle Grid.Column="0" Grid.ColumnSpan="2" Fill="#66000000" StrokeThickness="10" >
+            <Rectangle.Effect>
+                <DropShadowEffect BlurRadius="10"/>
+            </Rectangle.Effect>
+        </Rectangle>
+
+        <Image Grid.Column="0" Grid.ColumnSpan="2" Stretch="UniformToFill" Source="pack://application:,,,/MainApplication;component/Resources/Images/BuzzWheeler Design Logo.png"/>
+
+    </Grid>
+</Window>
