@@ -1,5 +1,4 @@
-﻿using BuzzWheeler;
-using CommonServiceLocator;
+﻿using CommonServiceLocator;
 using MainApplication.Views;
 using Prism.Ioc;
 using Prism.Modularity;

@@ -34,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>output.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="CommonServiceLocator, Version=2.0.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.2.0.4\lib\net47\CommonServiceLocator.dll</HintPath>
@@ -177,15 +180,27 @@
   <ItemGroup>
     <Resource Include="Resources\Images\partyImage.jpg" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\Images\BuzzWheeler Design Logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\output.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="output.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
 if not exist Libraries mkdir Libraries
 
+if not exist Resources mkdir Resources
+
+if not exist Resources\Sound mkdir Resources\Sound
 
 
-ROBOCOPY "$(TargetDir) " "$(TargetDir)Libraries\ " /XF *.exe *.config *.manifest /XD Libraries /E /IS /MOVE
+
+ROBOCOPY "$(TargetDir) " "$(TargetDir)Libraries\ " /XF *.exe *.config *.manifest /XD Libraries Resources /E /IS /MOVE
 if %25errorlevel%25 leq 4 exit 0 else exit %25errorlevel%25</PostBuildEvent>
   </PropertyGroup>
 </Project>

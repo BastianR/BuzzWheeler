@@ -46,7 +46,24 @@
                                 </Style>
                             </Grid.Resources>
 
-                            <TextBlock x:Name="PART_MiddleTextBlock" FontFamily="Microsoft Sans Serif" FontWeight="Bold" FontSize="26" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            <TextBlock x:Name="PART_MiddleTextBlock" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBlock.Resources>
+                                    <Style x:Key="BrTextBlockMiddleStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource BrTextBlockStyle}">
+                                        <Setter Property="Foreground" Value="#FFFAFAFA" />
+                                        <Setter Property="FontFamily" Value="Microsoft Sans Serif" />
+                                        <Setter Property="FontWeight" Value="Bold" />
+                                        <Setter Property="FontSize" Value="38" />
+                                    </Style>
+                                    <Style x:Key="BrTextBlockMiddleFinishStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource BrTextBlockMiddleStyle}">
+                                        <Setter Property="Foreground" Value="#FFFF6F00" />
+                                        <Setter Property="Effect">
+                                            <Setter.Value>
+                                                <DropShadowEffect Color="#FFFAFAFA" ShadowDepth="0" BlurRadius="50"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </TextBlock.Resources>
+                            </TextBlock>
                         </Grid>
                     </Border>
                 </ControlTemplate>

@@ -22,6 +22,8 @@ namespace BrElements.Controls
         private Style m_ArcSelectedStyle;
         private Style m_BrTextBlockStyle;
         private Style m_BrTextBlockSelectedStyle;
+        private Style m_BrTextBlockMiddleStyle;
+        private Style m_BrTextBlockMiddleFinishStyle;
         private double m_CalculatedArcWidth;
         private double m_CalculatedCurrentStartAngle;
         private double m_CalculatedTextDiameter;
@@ -61,6 +63,21 @@ namespace BrElements.Controls
                     FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
                     new PropertyChangedCallback(OnBrSelectedItemIndexChanged),
                     new CoerceValueCallback(OnBrSelectedItemIndexCoerce)
+                )
+            );
+
+        public static readonly DependencyProperty BrArcCircleIsRunningProperty =
+            DependencyProperty.Register
+            (
+                "BrArcCircleIsRunning",
+                typeof(bool),
+                typeof(BrArcCircle),
+                new FrameworkPropertyMetadata
+                (
+                    false,
+                    FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
+                    new PropertyChangedCallback(OnBrArcCircleIsRunningChanged),
+                    new CoerceValueCallback(OnBrArcCircleIsRunningCoerce)
                 )
             );
 
@@ -127,6 +144,12 @@ namespace BrElements.Controls
             set { SetValue(BrSelectedItemIndexProperty, value); }
         }
 
+        public bool BrArcCircleIsRunning
+        {
+            get { return (bool)GetValue(BrArcCircleIsRunningProperty); }
+            set { SetValue(BrArcCircleIsRunningProperty, value); }
+        }
+
         public double CircleStartAngle
         {
             get { return (double)GetValue(CircleStartAngleProperty); }
@@ -179,6 +202,8 @@ namespace BrElements.Controls
             m_ArcSelectedStyle = m_Grid.Resources["BrArcSelectedStyle"] as Style;
             m_BrTextBlockStyle = m_Grid.Resources["BrTextBlockStyle"] as Style;
             m_BrTextBlockSelectedStyle = m_Grid.Resources["BrTextBlockSelectedStyle"] as Style;
+            m_BrTextBlockMiddleStyle = m_TextBlock.Resources["BrTextBlockMiddleStyle"] as Style;
+            m_BrTextBlockMiddleFinishStyle = m_TextBlock.Resources["BrTextBlockMiddleFinishStyle"] as Style;
         }
 
         #endregion
@@ -209,6 +234,17 @@ namespace BrElements.Controls
                 int newValue = (int)e.NewValue;
 
                 brArcCircle.OnBrSelectedItemIndexChanged(oldValue, newValue);
+            }
+        }
+
+        private static void OnBrArcCircleIsRunningChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is BrArcCircle brArcCircle)
+            {
+                bool oldValue = (bool)e.OldValue;
+                bool newValue = (bool)e.NewValue;
+
+                brArcCircle.OnBrArcCircleIsRunningChanged(oldValue, newValue);
             }
         }
 
@@ -279,6 +315,16 @@ namespace BrElements.Controls
             }
         }
 
+        protected virtual void OnBrArcCircleIsRunningChanged(bool oldValue, bool newValue)
+        {
+            if (oldValue != newValue && BrItemsSource?.Count > 0)
+            {
+                BrArcCircleIsRunning = newValue;
+            }
+
+            ChangeAfterRunningCircleMiddleTextStyle();
+        }
+
         protected virtual void OnCircleStartAngleChanged(double oldValue, double newValue)
         {
             if (newValue < CircleEndAngle)
@@ -319,6 +365,11 @@ namespace BrElements.Controls
             return baseValue;
         }
 
+        private static object OnBrArcCircleIsRunningCoerce(DependencyObject d, object baseValue)
+        {
+            return baseValue;
+        }
+
         private static object OnCircleStartAngleCoerce(DependencyObject d, object baseValue)
         {
             double value = 0.0f;
@@ -330,6 +381,7 @@ namespace BrElements.Controls
             catch (Exception exception)
             {
                 // todo Logging
+                Console.WriteLine(exception);
             }
             
             return value;
@@ -346,6 +398,7 @@ namespace BrElements.Controls
             catch (Exception exception)
             {
                 // todo Logging
+                Console.WriteLine(exception);
             }
 
             return value;
@@ -397,6 +450,13 @@ namespace BrElements.Controls
 
         private void CheckBrItemsSourceForCalculation()
         {
+            BrSelectedItemIndex = 0;
+            m_OldSelectedItemIndex = 0;
+
+            m_Grid.Dispatcher.BeginInvoke(new Action(() => {
+                m_TextBlock.Style = m_BrTextBlockMiddleStyle;
+            }), DispatcherPriority.Send);
+
             if (BrItemsSource?.Count > 0)
             {
                 CalculateBaseParameter();
@@ -447,7 +507,6 @@ namespace BrElements.Controls
                     Margin = new Thickness(brArcCircleItem.TextCoordinateX, brArcCircleItem.TextCoordinateY, 0, 0),
                     VerticalAlignment = VerticalAlignment.Center,
                     HorizontalAlignment = HorizontalAlignment.Center,
-                    Foreground = Brushes.White,
                     Style = m_BrTextBlockStyle
                 };
 
@@ -502,30 +561,45 @@ namespace BrElements.Controls
         {
             if (m_OldSelectedItemIndex != BrSelectedItemIndex)
             {
-                Console.WriteLine(m_OldSelectedItemIndex);
-                Console.WriteLine(BrSelectedItemIndex);
-                Console.WriteLine("---");
-                BrItemsSource[m_OldSelectedItemIndex].Arc.Style = m_ArcStyle;
-                BrItemsSource[m_OldSelectedItemIndex].TextBlock.Style = m_BrTextBlockStyle;
-                BrItemsSource[BrSelectedItemIndex].Arc.Style = m_ArcSelectedStyle;
-                BrItemsSource[BrSelectedItemIndex].TextBlock.Style = m_BrTextBlockSelectedStyle;
+                m_Grid.Dispatcher.BeginInvoke(new Action(() => {
+                    BrItemsSource[m_OldSelectedItemIndex].Arc.Style = m_ArcStyle;
+                    BrItemsSource[m_OldSelectedItemIndex].TextBlock.Style = m_BrTextBlockStyle;
+                    BrItemsSource[BrSelectedItemIndex].Arc.Style = m_ArcSelectedStyle;
+                    BrItemsSource[BrSelectedItemIndex].TextBlock.Style = m_BrTextBlockSelectedStyle;
 
-                ChangeMiddleTextBlockText(BrItemsSource[BrSelectedItemIndex].Name);
+                    ChangeMiddleTextBlockText(BrItemsSource[BrSelectedItemIndex].Name);
+                }), DispatcherPriority.Send);
             }
             else
             {
-                Console.WriteLine(100);
-                Console.WriteLine(BrSelectedItemIndex);
-                BrItemsSource[BrSelectedItemIndex].Arc.Style = m_ArcSelectedStyle;
-                BrItemsSource[BrSelectedItemIndex].TextBlock.Style = m_BrTextBlockSelectedStyle;
+                m_Grid.Dispatcher.BeginInvoke(new Action(() => {
+                    BrItemsSource[BrSelectedItemIndex].Arc.Style = m_ArcSelectedStyle;
+                    BrItemsSource[BrSelectedItemIndex].TextBlock.Style = m_BrTextBlockSelectedStyle;
 
-                ChangeMiddleTextBlockText(BrItemsSource[BrSelectedItemIndex].Name);
+                    ChangeMiddleTextBlockText(BrItemsSource[BrSelectedItemIndex].Name);
+                }), DispatcherPriority.Send);
             }
         }
 
         private void ChangeMiddleTextBlockText(string text)
         {
             m_TextBlock.Text = text;
+        }
+
+        private void ChangeAfterRunningCircleMiddleTextStyle()
+        {
+            if (BrArcCircleIsRunning)
+            {
+                m_Grid.Dispatcher.BeginInvoke(new Action(() => {
+                    m_TextBlock.Style = m_BrTextBlockMiddleStyle;
+                }), DispatcherPriority.Send);
+            }
+            else
+            {
+                m_Grid.Dispatcher.BeginInvoke(new Action(() => {
+                    m_TextBlock.Style = m_BrTextBlockMiddleFinishStyle;
+                }), DispatcherPriority.Send);
+            }
         }
 
         #endregion

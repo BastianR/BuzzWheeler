@@ -6,11 +6,11 @@
         xmlns:prism="http://prismlibrary.com/"
         prism:ViewModelLocator.AutoWireViewModel="True"
         mc:Ignorable="d"
-        Title="Buzz Wheeler 1.0" Height="450" Width="800" Background="#FF212121">
+        Title="Buzz Wheeler 1.0" Height="450" Width="800" Background="#FF212121" WindowStartupLocation="CenterScreen" WindowStyle="ThreeDBorderWindow" WindowState="Maximized">
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*" MaxWidth="300"/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
 

@@ -1,12 +1,13 @@
 ﻿using BrElements.Classes;
 using BuzzWheeler.AggregatorEvents;
+using GenericUsbInput;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
 using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Threading;
+using System.Media;
 using System.Threading.Tasks;
 
 namespace BuzzWheeler.ViewModels
@@ -19,6 +20,9 @@ namespace BuzzWheeler.ViewModels
         private ObservableCollection<BrArcCircleItem> m_BrArcCircleItems;
         private int m_BrSelectedArcCircleIndex;
         private bool m_WheelIsRunning;
+        private SoundPlayer m_WheelLoopSound;
+        private SoundPlayer m_WheelEndSound;
+        private JoystickInput m_JoystickInput;
 
         #endregion
 
@@ -39,7 +43,13 @@ namespace BuzzWheeler.ViewModels
             m_EventAggregator = eventAggregator;
             StartWheelCommand = new DelegateCommand(StartWheel, CanStartWheel);
             SubscribeToEventAggregator();
+            m_WheelLoopSound = new SoundPlayer(AppDomain.CurrentDomain.BaseDirectory + @"/Resources/Sound/LoopSound.wav");
+            m_WheelEndSound = new SoundPlayer(AppDomain.CurrentDomain.BaseDirectory + @"/Resources/Sound/EndSound.wav");
+            m_JoystickInput = new JoystickInput();
+            m_JoystickInput.InputDeviceButton0DownEvent += OnJoystickInputButton0Down;
         }
+
+        
 
         #endregion
 
@@ -93,7 +103,7 @@ namespace BuzzWheeler.ViewModels
 
         
 
-        private void Xsdasd()
+        private void StartTheWheel()
         {
             Task wheelTask = Task.Factory.StartNew(LoopThroughSelectedIndex);
         }
@@ -101,9 +111,9 @@ namespace BuzzWheeler.ViewModels
         private async Task LoopThroughSelectedIndex()
         {
             Random random = new Random();
-            int randomLoopTimer = random.Next(100, 500);
+            int randomLoopTimer = random.Next(50, 200);
             int currentLoopTimer = 0;
-            int currentDelayTime = 200;
+            int currentDelayTime = 50;
             int delayFaktor = 2;
 
             while (WheelIsRunning)
@@ -118,23 +128,31 @@ namespace BuzzWheeler.ViewModels
                 {
                     BrSelectedArcCircleIndex++;
                 }
-
                 
                 if (currentLoopTimer < randomLoopTimer)
                 {
                     currentLoopTimer++;
+                    m_WheelLoopSound.Play();
                 }
                 else
                 {
                     currentDelayTime += delayFaktor;
                     delayFaktor = (int)(Convert.ToDouble(delayFaktor) * 1.5);
+                    m_WheelLoopSound.Play();
                 }
 
                 if (currentDelayTime >= 2000)
                 {
                     WheelIsRunning = false;
+                    m_WheelEndSound.Play();
+                    SendMessageWheelIsRunning(WheelIsRunning);
                 }
             }
+        }
+
+        private void SendMessageWheelIsRunning(bool wheelIsRunning)
+        {
+            m_EventAggregator.GetEvent<MessageBrCircleIsRunningEvent>().Publish(wheelIsRunning);
         }
 
         #endregion
@@ -151,7 +169,8 @@ namespace BuzzWheeler.ViewModels
         private void StartWheel()
         {
             WheelIsRunning = true;
-            Xsdasd();
+            SendMessageWheelIsRunning(WheelIsRunning);
+            StartTheWheel();
         }
 
         #endregion
@@ -163,6 +182,14 @@ namespace BuzzWheeler.ViewModels
         private void BrArcCircleItemsChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             StartWheelCommand.RaiseCanExecuteChanged();
+        }
+
+        private void OnJoystickInputButton0Down(object sender, EventArgs e)
+        {
+            if (CanStartWheel())
+            {
+                StartWheel();
+            }
         }
 
         #endregion

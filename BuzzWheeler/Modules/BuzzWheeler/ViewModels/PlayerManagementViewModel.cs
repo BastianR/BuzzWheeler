@@ -3,6 +3,7 @@ using BuzzWheeler.AggregatorEvents;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 
@@ -42,7 +43,11 @@ namespace BuzzWheeler.ViewModels
         public bool WheelIsRunning
         {
             get => m_WheelIsRunning;
-            set => SetProperty(ref m_WheelIsRunning, value);
+            set
+            {
+                SetProperty(ref m_WheelIsRunning, value);
+                RemovePlayerCommand.RaiseCanExecuteChanged();
+            }
         }
 
         #endregion
@@ -64,6 +69,8 @@ namespace BuzzWheeler.ViewModels
         public PlayerManagementViewModel(IEventAggregator eventAggregator)
         {
             m_EventAggregator = eventAggregator;
+            m_EventAggregator.GetEvent<MessageBrCircleIsRunningEvent>().Subscribe(asdd);
+
             m_BrArcCircleItems = new ObservableCollection<BrArcCircleItem>();
 
             RemoveEnteredNameCommand = new DelegateCommand(RemoveEnteredName);
@@ -87,6 +94,11 @@ namespace BuzzWheeler.ViewModels
         private bool CanAddPlayer()
         {
             bool canAddPlayer = false;
+
+            if (m_EnteredName != null && m_EnteredName.Length > 0)
+            {
+                m_EnteredName = m_EnteredName.Trim();
+            }
 
             bool checkNullOrEmpty = string.IsNullOrEmpty(EnteredName);
             bool checkRedundancy = BrArcCircleItems?.FirstOrDefault(brArcCircleItem => brArcCircleItem.Name == EnteredName) != null ? true : false;
@@ -134,6 +146,11 @@ namespace BuzzWheeler.ViewModels
         private void SendMessageBrCircleItems()
         {
             m_EventAggregator.GetEvent<MessageBrCircleItemsEvent>().Publish(BrArcCircleItems);
+        }
+
+        private void asdd(bool wheelIsRunning)
+        {
+            WheelIsRunning = wheelIsRunning;
         }
 
         #endregion

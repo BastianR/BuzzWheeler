@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Support", "Utilities\Suppor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuzzWheeler", "Modules\BuzzWheeler\BuzzWheeler.csproj", "{B18EC598-C8E3-43A1-B149-A17653EDE6E2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericUsbInput", "Utilities\GenericUsbInput\GenericUsbInput.csproj", "{6B6A2C18-44D5-46BF-B33D-9B48AEF8E921}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,10 @@ Global
 		{B18EC598-C8E3-43A1-B149-A17653EDE6E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B18EC598-C8E3-43A1-B149-A17653EDE6E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B18EC598-C8E3-43A1-B149-A17653EDE6E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B6A2C18-44D5-46BF-B33D-9B48AEF8E921}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B6A2C18-44D5-46BF-B33D-9B48AEF8E921}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B6A2C18-44D5-46BF-B33D-9B48AEF8E921}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B6A2C18-44D5-46BF-B33D-9B48AEF8E921}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -52,6 +58,7 @@ Global
 		{5A6F8E61-1D9A-49CD-851A-AB571ADA91FD} = {77C2096A-38E7-4452-9E0B-CBFCBFE7CAEA}
 		{648B6B15-BC50-4670-8ED0-90ABF56A6B66} = {F9AFBFB4-53A9-4A9C-8CB0-11ACB956BD9F}
 		{B18EC598-C8E3-43A1-B149-A17653EDE6E2} = {C2C5DF9F-4B89-4723-83FE-8F4A042F8DE5}
+		{6B6A2C18-44D5-46BF-B33D-9B48AEF8E921} = {F9AFBFB4-53A9-4A9C-8CB0-11ACB956BD9F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2026A7CE-F93E-457A-AF2C-21C679B50A46}

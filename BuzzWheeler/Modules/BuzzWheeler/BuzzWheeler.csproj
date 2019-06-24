@@ -60,6 +60,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AggregatorEvents\MessageBrCircleIsRunningEvent.cs" />
     <Compile Include="AggregatorEvents\MessageBrCircleItemsEvent.cs" />
     <Compile Include="BuzzWheelerModule.cs" />
     <Compile Include="Contracts\ConstantNames.cs" />
@@ -91,6 +92,18 @@
       <Project>{5A6F8E61-1D9A-49CD-851A-AB571ADA91FD}</Project>
       <Name>BrElements</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Utilities\GenericUsbInput\GenericUsbInput.csproj">
+      <Project>{6B6A2C18-44D5-46BF-B33D-9B48AEF8E921}</Project>
+      <Name>GenericUsbInput</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Sound\EndSound.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sound\LoopSound.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

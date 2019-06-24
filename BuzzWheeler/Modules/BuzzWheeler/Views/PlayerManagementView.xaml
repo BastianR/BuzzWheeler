@@ -45,7 +45,7 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding Name}" FontFamily="Microsoft Sans Serif" FontWeight="Bold" FontSize="14" />
-                            <Button Grid.Column="1" Content="X" Command="{Binding ElementName=PlayerManagementUserControl, Path=DataContext.RemovePlayerCommand}" CommandParameter="{Binding Name}" FontFamily="Microsoft Sans Serif" FontWeight="Bold" FontSize="14" />
+                            <Button Grid.Column="1" Content="X" BorderThickness="0" Height="25" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Command="{Binding ElementName=PlayerManagementUserControl, Path=DataContext.RemovePlayerCommand}" CommandParameter="{Binding Name}" FontFamily="Microsoft Sans Serif" FontWeight="Bold" FontSize="14" />
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
