@@ -25,7 +25,7 @@ namespace MainApplication.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1000")]
+        [global::System.Configuration.DefaultSettingValueAttribute("4000")]
         public int SplashScreenTime {
             get {
                 return ((int)(this["SplashScreenTime"]));

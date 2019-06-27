@@ -18,7 +18,7 @@
             </Rectangle.Effect>
         </Rectangle>
 
-        <Image Grid.Column="0" Grid.ColumnSpan="2" Stretch="UniformToFill" Source="pack://application:,,,/MainApplication;component/Resources/Images/BuzzWheeler Design Logo.png"/>
+        <Image Grid.Column="0" Grid.ColumnSpan="2" Stretch="UniformToFill" Source="pack://application:,,,/Buzz Wheeler;component/Resources/Images/BuzzWheeler Design Logo.png"/>
 
     </Grid>
 </Window>
