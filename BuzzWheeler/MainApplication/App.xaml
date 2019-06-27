@@ -6,10 +6,10 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/MainApplication;component/Resources/Styles/Colors.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MainApplication;component/Resources/Styles/ButtonStyles.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MainApplication;component/Resources/Styles/TextBoxStyles.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MainApplication;component/Resources/Styles/ListViewStyles.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Buzz Wheeler;component/Resources/Styles/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Buzz Wheeler;component/Resources/Styles/ButtonStyles.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Buzz Wheeler;component/Resources/Styles/TextBoxStyles.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Buzz Wheeler;component/Resources/Styles/ListViewStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

@@ -14,7 +14,7 @@
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
 
-        <Image Grid.Column="0" Grid.ColumnSpan="2" Stretch="UniformToFill" Source="pack://application:,,,/MainApplication;component/Resources/Images/partyImage.jpg">
+        <Image Grid.Column="0" Grid.ColumnSpan="2" Stretch="UniformToFill" Source="pack://application:,,,/Buzz Wheeler;component/Resources/Images/partyImage.jpg">
             <Image.Effect>
                 <BlurEffect RenderingBias="Quality" Radius="10"/>
             </Image.Effect>

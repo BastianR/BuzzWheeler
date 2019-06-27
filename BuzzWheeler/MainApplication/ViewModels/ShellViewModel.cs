@@ -1,6 +1,4 @@
 ﻿namespace MainApplication.ViewModels
 {
-    public class ShellViewModel
-    {
-    }
+    public class ShellViewModel { }
 }
