@@ -7,11 +7,11 @@ After a "roll" is triggered, the application chooses one random player to do som
 
 Here a screenshot of the application:
 
-![alt text](https://www.bastianr.de/git/bastianr/buzz-wheeler/raw/development/Example-Screenshots/Buzz-Wheeler%20Screenshot.png)
+![alt text](https://github.com/BastianR/BuzzWheeler/blob/master/Example-Screenshots/Buzz-Wheeler%20Screenshot.png?raw=true)
 
 And this is my selfmade button box:
 
-![alt text](https://www.bastianr.de/git/bastianr/buzz-wheeler/raw/development/Example-Screenshots/20190618_202322.jpg)
+![alt text](https://github.com/BastianR/BuzzWheeler/blob/master/Example-Screenshots/20190618_202322.jpg?raw=true)
 
 # Dependencies
 
@@ -20,7 +20,8 @@ And this is my selfmade button box:
 
 # Infos
 
-Do not exit the USB-Connection during the application is running ;)
+- In the zip-file "Buzz-Wheeler 1.0.zip" there is a fully compiled and built and ready to use application
+- Do not exit the USB-Connection during the application is running ;)
 
 # Copyright
 
