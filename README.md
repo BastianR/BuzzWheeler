@@ -5,6 +5,8 @@ Wheel chooser to randomly select one item or person who has entered his name in 
 This application is made for my 35th birthday. The user has to type all persons/player in the list. After that, the user clicks "roll" and the wheel is spinning. In my case, I have built a button box with a big buzzer. The buzzer is the "roll"-key.
 After a "roll" is triggered, the application chooses one random player to do something. Maybe to drink a shot or something else :) ...!
 
+![alt text](https://www.bastianr.de/git/bastianr/buzz-wheeler/raw/development/Example-Screenshots/Buzz-Wheeler%20Screenshot.png)
+
 # Copyright
 
 by Bastian Ribbeck 2019 (MIT)
